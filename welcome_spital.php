@@ -45,7 +45,7 @@
                     <td>
                          <br>
                          Pentru început, am creat o bază de date care să acopere nevoile vitale în ceea ce reprezintă stocarea datelor dintr-un spital.
-                         Am creat 16 tabele, având un număr divers de coloane (în funcție de datele ce ar trebui stocate în fiecare), incluzând chei primare, dar și chei străine care să permite corelarea cu celelalte tabele (dacă este necesar).
+                         Am creat 16 tabele, având un număr divers de coloane (în funcție de datele ce ar trebui stocate în fiecare), incluzând chei primare, dar și chei străine care să permită corelarea cu celelalte tabele (dacă este necesar).
                          <br><br>Astfel, tabelele create (care se pot vedea și în imaginea din dreapta) sunt:
                          <ul>
                               <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;angajati</li>
@@ -70,11 +70,11 @@
                </tr>
                <tr>
                     <td>
-                        <br><br>Tabelul <b>angajati</b> reține id-ul angajatului (cheie primară), id-ul meseriei sale (cheie străină ce face legătura cu tabelul <b>angajati</b>), precum și diverse detalii despre angajat (nume, prenume, data nașterii, cnp, data angajării, salariul etc.).
+                        <br><br>Tabelul <b>angajati</b> reține id-ul angajatului (cheie primară), id-ul meseriei sale (cheie străină ce face legătura cu tabelul <b>meserii</b>), precum și diverse detalii despre angajat (nume, prenume, data nașterii, cnp, data angajării, salariul etc.).
                         <br><br>Tabelul <b>aparate</b> reține id-ul aparatului (cheie primară), id-ul furnizorului (cheie străină ce face legătura cu tabelul <b>furnizori</b>), precum și alte detalii: denumirea, cantitatea, prețul de achiziție etc.
                         <br><br>Tabelul <b>aparate_copii</b> reține id-ul copiei, împreună cu id-ul aparatului (cheie străină ce face legătura cu tabelul <b>aparate</b>), împreună formând cheia primară a tabelului. De asemenea, în tabel se află și id-ul secțiunii (cheie străină ce face legătura cu tabelul <b>secțiuni</b>) și data de achiziție. Acest tabel a fost creat pentru a putea ține mai ușor evidența localizării fiecărui aparat (la UPU, la Cardiologie etc.).
                         <br><br>Tabelul <b>furnizori</b> reține id-ul furnizorului (cheie primară), alături de alte detalii precum denumirea, CIF-ul, banca, contul, adresa etc.
-                        <br><br>Tabelul <b>medicamente</b> reține id-ul medicamentului (cheie primară), id-ul frunizorului (cheie străină ce face legătura cu tabelul <b>furnizori</b>), precum și alte detalii: denumirea, data fabricării, data expirării, cantitatea etc. Orice spital are o secțiune de farmacie pentru care trebuie să ținem evidența medicamentelor existente.
+                        <br><br>Tabelul <b>medicamente</b> reține id-ul medicamentului (cheie primară), id-ul furnizorului (cheie străină ce face legătura cu tabelul <b>furnizori</b>), precum și alte detalii: denumirea, data fabricării, data expirării, cantitatea etc. Orice spital are o secțiune de farmacie pentru care trebuie să ținem evidența medicamentelor existente.
                         <br><br>Tabelul <b>meserii</b> reține id-ul meseriei (cheie primară) și numele meseriei (medic chirurg, medic ortoped, asistent medical, recepționistă etc.).
                         <br><br>Tabelul <b>pacient</b> reține id-ul pacientului (cheie primară), precum și alte detalii: numele, prenumele, cnp-ul, greutatea, înălțimea, data nașterii, sex, adresă etc.
                         <br><br>Tabelul <b>paturi</b> reține id-ul patului (cheie primară), id-ul furnizorului (cheie străină ce face legătura cu tabelul <b>furnizori</b>), precum și alte detalii: tipul patului, cantitatea etc.
@@ -93,7 +93,7 @@
           />
           <table>
           <tr>
-          <br><br>Tabelul <b>paturi_copii</b> reține id-ul copiei, împreună cu id-ul patului (cheie străină ce face legătura cu tabelul <b>paturi</b>), împreună formând cheia primară a tabelului. De asemenea, în tabel se află și id-ul secțiunii (cheie străină ce face legătura cu tabelul <b>secțiuni</b>) și disponibilitatea. La fel ca în cazul tabelului <b>aparate_copii</b>, acest tabel a fost creat pentru a putea ține mai ușor evidența localizării fiecărui pat și a disponibilității sale (pcupat sau nu).
+          <br><br>Tabelul <b>paturi_copii</b> reține id-ul copiei, împreună cu id-ul patului (cheie străină ce face legătura cu tabelul <b>paturi</b>), împreună formând cheia primară a tabelului. De asemenea, în tabel se află și id-ul secțiunii (cheie străină ce face legătura cu tabelul <b>secțiuni</b>) și disponibilitatea. La fel ca în cazul tabelului <b>aparate_copii</b>, acest tabel a fost creat pentru a putea ține mai ușor evidența localizării fiecărui pat și a disponibilității sale (ocupat sau nu).
                         <br><br>Tabelul <b>produse_uz_general</b> reține id-ul produsului (cheie primară), id-ul furnizorului (cheie străină ce face legătura cu tabelul <b>furnizori</b>), precum și alte detalii: denumirea, cantitatea, prețul de achiziție etc. Acest tabel a fost creat deoarece un spital are nevoie de mai multe consumabile precum săpun, hârtie, ace, seringi etc.
                         <br><br>Tabelul <b>programari</b> reține id-ul programării (cheie primară), alături de id-ul pacientului programat (cheie străină ce face legătura cu tabelul <b>pacient</b>), id-ul angajatului care trebuie să fie prezent la programare (ex. un medic neurolog, un medic ORL etc.)(cheie străină ce face legătura cu tabelul <b>angajati</b>), id-ul secțiunii pentru care se face programarea (cheie străină ce face legătura cu tabelul <b>sectiuni</b>) și id-ul tipului de programare (ce face legătura cu tabelul <b>tipuri_programari</b>). De asemenea, se reține și data și ora programării, precum și prețul acesteia.
                         <br><br>Tabelul <b>tipuri_programari</b> reține id-ul tipului de programare (cheie primară), precum și denumirea (consult, operație, analize etc.).
@@ -103,7 +103,7 @@
                         <br><br>Tabelul <b>utilizatori</b> reține id-ul utilizatorului care se conectează în aplicația web (cheie primară), id-ul rolului său (cheie străină ce face legătura cu tabelul <b>roluri</b>), precum și id-ul angajatului (cheie străină ce face legătura cu tabelul <b>angajati</b>). De asemenea, tabelul stochează și username-ul și parola.</tr>
                         <tr>
                     <td>
-                         <br>Fiind cunoscut faptul că, în funcție de secțiunea din spital la care se prezintă un pacient, doctorul are de completat o fișă diferită, ce solicită completarea altor date față de celelalte secțiuni, îmi doresc ca aplicația mea web să permită utilizatorilor să deschidă fișe personalizate pentru fiecare secțiune. Astfel, voi creea și niște tabele <b>fisa_*</b> (ex. fisa_cardiologie, fisa_orl, fisa_ortopedie etc.) care să fie corelate de tabelele <b>pacient, angajati, sectiuni</b> prin chei străine și care să stocheze datele necesare fiecărei secțiuni.
+                         <br>Fiind cunoscut faptul că, în funcție de secțiunea din spital la care se prezintă un pacient, doctorul are de completat o fișă diferită, ce solicită completarea altor date față de celelalte secțiuni, îmi doresc ca aplicația mea web să permită utilizatorilor să deschidă fișe personalizate pentru fiecare secțiune. Astfel, odată cu crearea interfeței, voi crea și niște tabele <b>fisa_*</b> (ex. fisa_cardiologie, fisa_orl, fisa_ortopedie etc.) care să fie corelate cu tabelele <b>pacient, angajati, sectiuni</b> prin chei străine și care să stocheze datele necesare fiecărei secțiuni.
                     </td>
                </tr>
                <tr>
