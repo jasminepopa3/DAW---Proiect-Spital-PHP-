@@ -20,7 +20,7 @@
         <div class="logo">Spitalul de Urgență FMI</div>
         <div class="nav-items">
           <ul>
-            <li><a href="home_page.html">Home</a></li>
+            <li><a href="home_page.php">Home</a></li>
             <li class="dropdown">
                 <a href="">Secții</a> 
                 <div class="dropdown-content">
@@ -40,7 +40,7 @@
                 <a href="">Contul meu</a>
                 <div class="dropdown-content">
                     <a href="">Schimbă parola</a>
-                    <a href="">Logout</a>
+                    <a href="index.php">Logout</a>
                 </div>
             </li>
           </ul>
@@ -54,7 +54,7 @@
           <p>
             Suntem o echipă de profesioniști. Hai sa ajutăm oamenii. Programările și urgențele te așteaptă.
           </p>
-          <a href=""><button>Secții</button></a>
+          <a href="welcome_spital.php"><button>Despre proiectul Spitalul de Urgență FMI</button></a>
         </div>
         <div class="column-right">
           <img
