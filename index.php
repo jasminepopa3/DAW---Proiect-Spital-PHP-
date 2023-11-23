@@ -43,7 +43,7 @@
         }
 
         a {
-            color: #4caf50;
+            color: #1C8145;
             text-decoration: none;
         }
 
