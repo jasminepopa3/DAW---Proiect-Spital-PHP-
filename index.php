@@ -50,10 +50,113 @@
         a:hover {
             text-decoration: underline;
         }
+
+        * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
+nav {
+  height: 80px;
+  background: #3399ff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rem calc((100vw - 1300px) / 2);
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  padding: 0 1.5rem;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/*dropdown*/
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a, .dropbtn {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+/*stop*/
+
+.logo {
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0 2rem;
+}
+.hero {
+    background: #80bfff;
+    width: 100%;
+    height: 100vh; 
+    
+}
+
+  
     </style>
 </head>
 <body>
-
+<nav>
+    <div class="logo">Spitalul de Urgență FMI</div>
+</nav>
+<div class="hero">
 <h2>Autentificare</h2>
 
 <form action="process_login.php" method="post">
@@ -67,6 +170,6 @@
 </form>
 
 <p>Nu ai cont? <a href="register.php">Creează unul</a>.</p>
-
+</div>
 </body>
 </html>
