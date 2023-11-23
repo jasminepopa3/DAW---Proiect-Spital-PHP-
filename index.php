@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            margin: 0;
         }
 
         h2 {
@@ -51,7 +51,7 @@
             text-decoration: underline;
         }
 
-        * {
+ * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -146,7 +146,8 @@ li.dropdown {
     background: #80bfff;
     width: 100%;
     height: 100vh; 
-    
+    padding: 50px; 
+    box-sizing: border-box; 
 }
 
   
