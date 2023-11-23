@@ -18,6 +18,33 @@
   <body>
     <nav>
         <div class="logo">Spitalul de Urgență FMI</div>
+        <div class="nav-items">
+          <ul>
+            <li><a href="home_page.php">Home</a></li>
+            <li class="dropdown">
+                <a href="">Secții</a> 
+                <div class="dropdown-content">
+                    <a href="">Cardiologie</a>
+                    <a href="">Ortopedie</a>
+                    <a href="">UPU</a>
+                    <a href="">Pediatrie</a>
+                    <a href="">ATI</a>
+                    <a href="">Gastroenterologie</a>
+                    <a href="">Pneumologie</a>
+                </div>
+            </li>
+            <li>
+                <a href="">Fișe pacienți</a>
+            </li>
+            <li class="dropdown">
+                <a href="">Contul meu</a>
+                <div class="dropdown-content">
+                    <a href="">Schimbă parola</a>
+                    <a href="index.php">Logout</a>
+                </div>
+            </li>
+          </ul>
+        </div>
     </nav>
     
 
