@@ -38,6 +38,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Acest angajat nu există.");
     }
 
+    // Verific daca CNP-ul a fost deja utilizat de alt utilizator
+    $verificare_cnp_utilizator = "SELECT cnp FROM utilizatori WHERE cnp = '$cnp'";
+    $rezultat_cnp_utilizator = $conn->query($verificare_cnp_utilizator);
+
+    if ($rezultat_cnp_utilizator->num_rows > 0) {
+        echo '<script type="text/javascript">alert("Inregistrarea nu a functionat.");</script>';
+        die("Acest CNP a fost deja utilizat de alt utilizator.");
+    }
+
+    // Verific daca adresa de email a fost deja utilizata
+    $verificare_email_utilizator = "SELECT email FROM utilizatori WHERE email = '$email'";
+    $rezultat_email_utilizator = $conn->query($verificare_email_utilizator);
+
+    if ($rezultat_email_utilizator->num_rows > 0) {
+        echo '<script type="text/javascript">alert("Inregistrarea nu a functionat.");</script>';
+        die("Această adresă de email a fost deja utilizată.");
+    }
+
     // Obțin id_angajat
     $angajat = $rezultat->fetch_assoc();
     $id_angajat = $angajat["id_angajat"];
@@ -71,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPAuth   = true; 
 
         $to=$email;
-        $nume='Spitalul de urgenta FMI';
+        $nume='Utilizator nou';
 
         $mail->SMTPSecure = "ssl";                 
         $mail->Host       = "smtp.gmail.com";      
