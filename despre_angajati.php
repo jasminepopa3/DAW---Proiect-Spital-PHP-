@@ -7,7 +7,7 @@ session_start();
 // error_reporting(E_ALL);
 // ini_set('display_errors', 1);
 
-// Verifică dacă utilizatorul este autentificat și este de tip admin
+// Verific dacă utilizatorul este autentificat și este de tip admin
 if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && $_SESSION['user']['tip_user'] == 'admin') {
     $nume_utilizator = $_SESSION['user']['nume_utilizator'];
     $email = $_SESSION['user']['email'];
@@ -18,10 +18,10 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && 
     $password = "B6rndvUTlN";
     $dbname = "if0_35353732_spital_db";
 
-    // Creează conexiunea
+    // Creez conexiunea
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verifică conexiunea
+    // Verific conexiunea
     if ($conn->connect_error) {
         die("Conexiunea la baza de date a eșuat: " . $conn->connect_error);
     }
@@ -51,16 +51,16 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && 
 
     <script>
     function deschidePopUp(numeUtilizator) {
-    // Crează un element div pentru pop-up
+    // Creez un element div pentru pop-up
     var popup = document.createElement("div");
     popup.classList.add("popup");
 
-    // Adaugă un text area pentru introducerea raportului
+    // Adaug un textarea pentru a scrie raportul
     var textArea = document.createElement("textarea");
     textArea.placeholder = "Introduceți raportul pentru " + numeUtilizator + "...";
     popup.appendChild(textArea);
 
-    // Adaugă un buton de salvare
+    // Adaug un buton de salvare
     var salvareButton = document.createElement("button");
     salvareButton.textContent = "Salvare";
     salvareButton.onclick = function() {
@@ -69,7 +69,7 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && 
     };
     popup.appendChild(salvareButton);
 
-    // Adaugă un buton de printare
+    // Adaug un buton de printare 
     var printButton = document.createElement("button");
     printButton.textContent = "Printează";
     printButton.onclick = function() {
@@ -77,7 +77,7 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && 
     };
     //  popup.appendChild(printButton);
 
-    // Adaugă un buton de închidere
+    // Adaug un buton de închidere
     var inchidereButton = document.createElement("button");
     inchidereButton.textContent = "Închidere";
     inchidereButton.onclick = function() {
@@ -99,7 +99,7 @@ function inchidePopUp() {
 
 
 function salveazaRaport(numeUtilizator, continut) {
-    // Folosim AJAX pentru a trimite datele la server
+    // Folosesc AJAX pentru a trimite datele la server
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -119,7 +119,7 @@ function printeazaRaport(numeUtilizator, continut) {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            window.open(this.responseText, '_blank'); // Deschide PDF-ul într-o fereastră nouă
+            window.open(this.responseText, '_blank'); // Deschid PDF-ul într-o fereastră nouă
         }
     };
     xhttp.open("POST", "generare_pdf.php", true);
