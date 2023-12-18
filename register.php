@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Creare Cont</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -150,6 +151,10 @@ li.dropdown {
     padding: 50px; 
     box-sizing: border-box; 
 }
+.g-recaptcha {
+    margin: 0 auto; 
+    width: 300px;  
+  }
 
     </style>
 </head>
@@ -182,7 +187,10 @@ li.dropdown {
         <option value="manager">Manager</option>
      </select> -->
 
-
+    <br>
+    <div class="g-recaptcha" data-sitekey="6LeNqDUpAAAAAAyLKc5LcbSboej77QzSSJyGGlN_"></div>
+    <br>
+    
     <input type="submit" value="Înregistrare">
 </form>
 
