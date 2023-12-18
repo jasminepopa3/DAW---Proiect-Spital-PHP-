@@ -1,9 +1,23 @@
 
 <?php
-// ini_set('display_errors', 1);
-// ini_set('display_startup_errors', 1);
+session_start();
 // error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
+
+// Verificare reCAPTCHA
+$secretKey = "6LeNqDUpAAAAAHXdZ-oencWdG8i1qJbOndZBEQOf";
+$response = $_POST['g-recaptcha-response'];
+$remoteIP = $_SERVER['REMOTE_ADDR'];
+
+$url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$response&remoteip=$remoteIP";
+$recaptchaData = json_decode(file_get_contents($url));
+
+if (!$recaptchaData->success) {
+    // Răspunsul reCAPTCHA nu este valid
+    echo "Eroare reCAPTCHA!";
+} else {
+    // Răspunsul reCAPTCHA este valid
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Conectare la baza de date 
@@ -21,12 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Preiau datele din formular
-    $nume_utilizator = $_POST["nume_utilizator"];
+    $nume_utilizator = htmlspecialchars($_POST['nume_utilizator']);
     //$nume = $_POST["nume"];
     //$prenume = $_POST["prenume"];
-    $cnp = $_POST["cnp"];
-    $email = $_POST["email"];
-    $parola = $_POST["parola"];
+    $cnp = htmlspecialchars($_POST['cnp']);
+    $email = htmlspecialchars($_POST['email']);
+    $parola = htmlspecialchars($_POST['parola']);
     //$rol = $_POST["rol"];
 
     // Verific existenta CNP-ului în tabela angajati
@@ -120,5 +134,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Închid conexiunea la baza de date
     $conn->close();
+}
 }
 ?>
