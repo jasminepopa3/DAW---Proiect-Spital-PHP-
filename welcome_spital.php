@@ -1,3 +1,21 @@
+<?php
+session_start();
+
+// Verific dacă utilizatorul este autentificat
+if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+    $nume_utilizator = $_SESSION['user']['nume_utilizator'];
+    $email = $_SESSION['user']['email'];
+    // echo "Buna, ";
+    // echo  $nume_utilizator;
+} else {
+    // Utilizatorul nu este autentificat
+
+    // Cod specific pentru guests
+    // $mesaj = "Bine ați venit, oaspeți! Vă invităm să descoperiți activitățile noastre.";
+    // echo "<script>alert('$mesaj');</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,29 +38,54 @@
         <div class="logo">Spitalul de Urgență FMI</div>
         <div class="nav-items">
           <ul>
-            <li><a href="home_page.php">Home</a></li>
-            <li class="dropdown">
-                <a href="">Secții</a> 
-                <div class="dropdown-content">
-                    <a href="">Cardiologie</a>
-                    <a href="">Ortopedie</a>
-                    <a href="">UPU</a>
-                    <a href="">Pediatrie</a>
-                    <a href="">ATI</a>
-                    <a href="">Gastroenterologie</a>
-                    <a href="">Pneumologie</a>
+            <li><a href="index.php">Home</a></li>
+            <?php
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+            echo '<li class="dropdown">
+                 <a href="#">Secții</a> 
+                 <div class="dropdown-content">
+                     <a href="cardiologie.php">Cardiologie</a>
+                     <a href="ortopedie.php">Ortopedie</a>
+                     <a href="upu.php">UPU</a>
+                     <a href="pediatrie.php">Pediatrie</a>
+                     <a href="ati.php">ATI</a>
+                     <a href="gastroenterologie.php">Gastroenterologie</a>
+                     <a href="pneumologie.php">Pneumologie</a>
                 </div>
-            </li>
-            <li>
-                <a href="">Fișe pacienți</a>
-            </li>
-            <li class="dropdown">
-                <a href="">Contul meu</a>
-                <div class="dropdown-content">
-                    <a href="">Schimbă parola</a>
-                    <a href="index.php">Logout</a>
-                </div>
-            </li>
+                </li>';
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+                    echo '<li><a href="fise_pacienti.php">Fișe pacienți</a></li>';
+            }
+            ?>
+            <?php
+            //var_dump($_SESSION['user']);  Afișeaz conținutul array-ului $_SESSION['user']
+
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+              if (isset($_SESSION['user']['tip_user']) && $_SESSION['user']['tip_user'] == 'admin') {
+                  // Utilizatorul este logat și are drepturi de admin, afișează butoanele specifice
+                echo '<li class="dropdown">
+                        <a href="#">Contul meu</a>
+                        <div class="dropdown-content">
+                           <a href="despre_angajati.php">Despre angajati</a>
+                           <a href="logout.php">Logout</a>
+                        </div>
+                    </li>';
+               }else if(isset($_SESSION['user']['tip_user']) && $_SESSION['user']['tip_user'] == 'user') {
+                   echo '<li class="dropdown">
+                        <a href="#">Contul meu</a>
+                        <div class="dropdown-content">
+                           <a href="logout.php">Logout</a>
+                        </div>
+                    </li>';
+
+               }
+}
+?>
+
           </ul>
         </div>
     </nav>
