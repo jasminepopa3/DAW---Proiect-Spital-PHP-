@@ -1,176 +1,124 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Autentificare</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-        }
+<?php
+session_start();
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
 
-        h2 {
-            color: #333;
-        }
+// Verific dacă utilizatorul este autentificat
+if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+    $nume_utilizator = $_SESSION['user']['nume_utilizator'];
+    $email = $_SESSION['user']['email'];
+    // echo "Buna, ";
+    // echo  $nume_utilizator;
+} else {
+    // Utilizatorul nu este autentificat
 
-        form {
-            max-width: 400px;
-            margin: 20px auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-        }
-
-        input[type="submit"] {
-            background-color: #4caf50;
-            color: white;
-            cursor: pointer;
-        }
-
-        p {
-            margin-top: 20px;
-        }
-
-        a {
-            color: #1C8145;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
- * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
-    'Lucida Sans', Arial, sans-serif;
+    // Cod specific pentru guests
+    $mesaj = "Bine ați venit! Vă invităm să vă conectați pentru a trece la treaba!";
+    echo "<script>alert('$mesaj');</script>";
 }
+?>
 
-nav {
-  height: 80px;
-  background: #3399ff;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0rem calc((100vw - 1300px) / 2);
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Jasmine"/>
+    <meta name="description" content="Activitatile spitalului FMI"/>
+    <meta name="keywords" content="Spital">
+
+
+
+    <title>Activitatile spitalului FMI</title>
+
+    <link rel="stylesheet" href="home_page.css" />
+  </head>
+
+
+  <body>
+    <nav>
+        <div class="logo">Spitalul de Urgență FMI</div>
+        <div class="nav-items">
+          <ul>
+            <li><a href="index.php">Home</a></li>
+            <?php
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+            echo '<li class="dropdown">
+                 <a href="#">Secții</a> 
+                 <div class="dropdown-content">
+                     <a href="cardiologie.php">Cardiologie</a>
+                     <a href="ortopedie.php">Ortopedie</a>
+                     <a href="upu.php">UPU</a>
+                     <a href="pediatrie.php">Pediatrie</a>
+                     <a href="ati.php">ATI</a>
+                     <a href="gastroenterologie.php">Gastroenterologie</a>
+                     <a href="pneumologie.php">Pneumologie</a>
+                </div>
+                </li>';
+            }
+            ?>
+
+            <?php
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+                    echo '<li><a href="fise_pacienti.php">Fișe pacienți</a></li>';
+            }
+            ?>
+            <?php
+            //var_dump($_SESSION['user']);  Afișez conținutul array-ului $_SESSION['user']
+
+            if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
+              if (isset($_SESSION['user']['tip_user']) && $_SESSION['user']['tip_user'] == 'admin') {
+                  // Utilizatorul este logat și are drepturi de admin, afișează butoanele specifice
+                echo '<li class="dropdown">
+                        <a href="#">Contul meu</a>
+                        <div class="dropdown-content">
+                           <a href="despre_angajati.php">Despre angajati</a>
+                           <a href="logout.php">Logout</a>
+                        </div>
+                    </li>';
+               }else if(isset($_SESSION['user']['tip_user']) && $_SESSION['user']['tip_user'] == 'user') {
+                   echo '<li class="dropdown">
+                        <a href="#">Contul meu</a>
+                        <div class="dropdown-content">
+                           <a href="logout.php">Logout</a>
+                        </div>
+                    </li>';
+
+               }
 }
+?>
 
-nav a {
-  text-decoration: none;
-  color: #000;
-  padding: 0 1.5rem;
-}
-
-nav a:hover {
-  color: #fff;
-}
-
-/*dropdown*/
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-li {
-  float: left;
-}
-
-li a, .dropbtn {
-  display: inline-block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-li.dropdown {
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
+          </ul>
+        </div>
+    </nav>
 
 
+    <section class="hero">
+      <div class="hero-container">
+        <div class="column-left">
+          <h1>Viața e o călătorie. Fiecare are dreptul de a se bucura de ea.</h1>
+          <p>
+            Suntem o echipă de profesioniști. Hai să ajutăm oamenii. Programările și urgențele te așteaptă.
+          </p>
+          <a href="welcome_spital.php"><button>Despre proiectul Spitalul de Urgență FMI</button></a><br>
+          <?php
 
-/*stop*/
+            if (!(isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']))) { ?>
+               <a href="login.php"><button>Autentificare</button></a>
+            <?php } ?>
+        </div>
+        <div class="column-right">
+          <img
+            id="hero-image"
+            src="fmi.png"
+            alt="illustration"
+            class="hero-image"
+          />
+        </div>
+      </div>
+    </section>
 
-.logo {
-  color: #000;
-  font-size: 1rem;
-  font-weight: bold;
-  font-style: italic;
-  padding: 0 2rem;
-}
-.hero {
-    background: #80bfff;
-    width: 100%;
-    height: 100vh; 
-    padding: 50px; 
-    box-sizing: border-box; 
-}
 
-  
-    </style>
-</head>
-<body>
-<nav>
-    <div class="logo">Spitalul de Urgență FMI</div>
-</nav>
-<div class="hero">
-<h2>Autentificare</h2>
-
-<form action="process_login.php" method="post">
-    <label for="email">Adresa de E-mail:</label>
-    <input type="email" name="email" required>
-
-    <label for="parola">Parola:</label>
-    <input type="password" name="parola" required>
-
-    <input type="submit" value="Autentificare">
-</form>
-
-<p>Nu ai cont? <a href="register.php">Creează unul</a>.</p>
-</div>
-</body>
+  </body>
 </html>
+
+
