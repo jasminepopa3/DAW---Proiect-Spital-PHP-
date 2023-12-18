@@ -5,10 +5,10 @@ $username = "if0_35353732";
 $password = "B6rndvUTlN";
 $dbname = "if0_35353732_spital_db";
 
-// Creează conexiunea
+// Creez conexiunea
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifică conexiunea
+// Verific conexiunea
 if ($conn->connect_error) {
     die("Conexiunea la baza de date a eșuat: " . $conn->connect_error);
 }
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 $numeUtilizator = $_POST['nume_utilizator'];
 $continut = $_POST['continut'];
 
-// Salvează raportul în baza de date
+// Salvez raportul în baza de date
 $query = "INSERT INTO rapoarte_angajati (nume_utilizator, continut) VALUES ('$numeUtilizator', '$continut')";
 
 if ($conn->query($query) === TRUE) {
@@ -26,6 +26,6 @@ if ($conn->query($query) === TRUE) {
     echo "Eroare la salvarea raportului: " . $conn->error;
 }
 
-// Închide conexiunea
+// Închid conexiunea
 $conn->close();
 ?>
