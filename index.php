@@ -43,15 +43,15 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
             <?php
             if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
             echo '<li class="dropdown">
-                 <a href="#">Secții</a> 
+                 <a href="sectii.php">Secții</a> 
                  <div class="dropdown-content">
                      <a href="cardiologie.php">Cardiologie</a>
-                     <a href="ortopedie.php">Ortopedie</a>
-                     <a href="upu.php">UPU</a>
-                     <a href="pediatrie.php">Pediatrie</a>
-                     <a href="ati.php">ATI</a>
-                     <a href="gastroenterologie.php">Gastroenterologie</a>
-                     <a href="pneumologie.php">Pneumologie</a>
+                    <a href="ortopedie.php">Ortopedie</a>
+                    <a href="upu.php">UPU</a>
+                    <a href="pediatrie.php">Pediatrie</a>
+                    <a href="ati.php">ATI</a>
+                    <a href="gastroenterologie.php">Gastroenterologie</a>
+                    <a href="pneumologie.php">Pneumologie</a>
                 </div>
                 </li>';
             }
@@ -59,7 +59,7 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
 
             <?php
             if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator'])) {
-                    echo '<li><a href="fise_pacienti.php">Fișe pacienți</a></li>';
+                    echo '<li><a href="pacienti.php">Fișe pacienți</a></li>';
             }
             ?>
             <?php
