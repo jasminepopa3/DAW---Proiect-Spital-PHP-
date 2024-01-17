@@ -119,11 +119,11 @@
     color: #000;
   }
 
-  #popupFisaPacient {
+   #popupFisaPacient {
         display: none;
         padding: 20px;
         background-color: #f2f2f2; 
-        border: 1px solid #ccc;
+        border: 3px solid #555;
         border-radius: 5px;
         width: 400px; 
         height: 400px; 
@@ -132,10 +132,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 1000; /* Z-index pentru a asigura vizibilitatea peste restul paginii */
-    }
-
-    #numePacient {
-        font-weight: bold;
     }
   
   
