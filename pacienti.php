@@ -217,6 +217,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
           
 <div id="popupFisaPacient" style="display:none;">
+    <div style="text-align: center"><b>Fisa pacient</b><br><br></div>
     <div>Nume pacient: <span id="numePacient"></span></div>
     <div>Prenume pacient: <span id="prenumePacient"></span></div>
     <div>Sex: <span id="sex"></span></div>
@@ -232,9 +233,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     <div>Email: <span id="email"></span></div>
 
     
-
-    
-    <br><br><br>
+    <br><br>
     <button onclick="inchidePopup()" >Închide</button>
     <button class="printeaza-fisa">Printează</button>
 
