@@ -1,0 +1,173 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+      'Lucida Sans', Arial, sans-serif;
+  }
+  
+  nav {
+    height: 80px;
+    background: #3399ff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem calc((100vw - 1300px) / 2);
+  }
+  
+  nav a {
+    text-decoration: none;
+    color: #000;
+    padding: 0 1.5rem;
+  }
+  
+  nav a:hover {
+    color: #fff;
+  }
+  
+  /*dropdown*/
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    
+  }
+  
+  
+  li {
+    float: left;
+  }
+  
+  li a, .dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    background-color: #333;
+  }
+  
+  li a:hover, .dropdown:hover .dropbtn {
+    background-color: red;
+  }
+  
+  li.dropdown {
+    display: inline-block;
+    background-color: #333;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    background-color: #f9f9f9;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1;}
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  
+  
+  /*stop*/
+  
+  .logo {
+    color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0 2rem;
+  }
+  .hero {
+    background: #80bfff;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 120vh;
+    /* padding: 3rem calc((100vw - 1300px) / 2); */
+    background: #80bfff
+  }
+
+  
+  button {
+    padding: 1rem 3rem;
+    font-size: 1rem;
+    border: none;
+    color: #4f8a7e;
+    background: #000;
+    cursor: pointer;
+    border-radius: 50px;
+  }
+  
+  button:hover {
+    background: #fff;
+    color: #000;
+  }
+
+  #popupFisaPacient {
+        display: none;
+        padding: 20px;
+        background-color: #f2f2f2; 
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 400px; 
+        height: 400px; 
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000; /* Z-index pentru a asigura vizibilitatea peste restul paginii */
+    }
+
+    #numePacient {
+        font-weight: bold;
+    }
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
