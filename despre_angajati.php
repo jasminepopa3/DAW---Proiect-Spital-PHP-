@@ -5,7 +5,12 @@
 <?php
 session_start();
 // error_reporting(E_ALL);
-// ini_set('display_errors', 1);
+//  ini_set('display_errors', 1);
+require 'jpgraph/src/jpgraph.php';
+require 'jpgraph/src/jpgraph_pie.php';
+require 'jpgraph/src/jpgraph_pie3d.php';
+
+ 
 
 // Verific dacă utilizatorul este autentificat și este de tip admin
 if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && $_SESSION['user']['tip_user'] == 'admin') {
@@ -69,12 +74,12 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user']['nume_utilizator']) && 
     };
     popup.appendChild(salvareButton);
 
-    // Adaug un buton de printare 
-    var printButton = document.createElement("button");
-    printButton.textContent = "Printează";
-    printButton.onclick = function() {
-        printeazaRaport(numeUtilizator, textArea.value);
-    };
+    // Adaug un buton de printare -- nu am mai adaugat->vezi pacienti
+    // var printButton = document.createElement("button");
+    // printButton.textContent = "Printează";
+    // printButton.onclick = function() {
+    //     printeazaRaport(numeUtilizator, textArea.value);
+    // };
     //  popup.appendChild(printButton);
 
     // Adaug un buton de închidere
@@ -112,28 +117,6 @@ function salveazaRaport(numeUtilizator, continut) {
 }
 
 
-function printeazaRaport(numeUtilizator, continut) {
-    salveazaRaport(numeUtilizator, continut) ;
-    // Generare PDF folosind PHP
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
-            window.open(this.responseText, '_blank'); // Deschid PDF-ul într-o fereastră nouă
-        }
-    };
-    xhttp.open("POST", "generare_pdf.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("nume_utilizator=" + encodeURIComponent(numeUtilizator) + "&continut=" + encodeURIComponent(continut));
-}
-
-
-
-
-
-
-
-
     </script>
   </head>
 
@@ -145,19 +128,19 @@ function printeazaRaport(numeUtilizator, continut) {
           <ul>
             <li><a href="index.php">Home</a></li>
             <li class="dropdown">
-                <a href="">Secții</a> 
+                <a href="sectii.php">Secții</a> 
                 <div class="dropdown-content">
-                    <a href="">Cardiologie</a>
-                    <a href="">Ortopedie</a>
-                    <a href="">UPU</a>
-                    <a href="">Pediatrie</a>
-                    <a href="">ATI</a>
-                    <a href="">Gastroenterologie</a>
-                    <a href="">Pneumologie</a>
+                    <a href="cardiologie.php">Cardiologie</a>
+                    <a href="ortopedie.php">Ortopedie</a>
+                    <a href="upu.php">UPU</a>
+                    <a href="pediatrie.php">Pediatrie</a>
+                    <a href="ati.php">ATI</a>
+                    <a href="gastroenterologie.php">Gastroenterologie</a>
+                    <a href="pneumologie.php">Pneumologie</a>
                 </div>
             </li>
             <li>
-                <a href="">Fișe pacienți</a>
+                <a href="pacienti.php">Fișe pacienți</a>
             </li>
             <?php
             //var_dump($_SESSION['user']);  Afișează conținutul array-ului $_SESSION['user']
@@ -168,7 +151,7 @@ function printeazaRaport(numeUtilizator, continut) {
                 echo '<li class="dropdown">
                         <a href="#">Contul meu</a>
                         <div class="dropdown-content">
-                           <a href="#">Despre angajati</a>
+                           <a href="despre_angajati.php">Despre angajati</a>
                            <a href="logout.php">Logout</a>
                         </div>
                     </li>';
@@ -192,9 +175,9 @@ function printeazaRaport(numeUtilizator, continut) {
     <section class="hero">
       
           <?php
-          // Verifică dacă există rezultate
+          // Verific dacă există rezultate
     if ($rezultat_utilizatori_activi->num_rows > 0) {
-        // Afisează lista utilizatorilor activi
+        // Afisez lista utilizatorilor activi + buton
         echo '<ul>';
         while ($row = $rezultat_utilizatori_activi->fetch_assoc()) {
             $nume_utilizator_activ = $row['nume_utilizator'];
@@ -205,10 +188,58 @@ function printeazaRaport(numeUtilizator, continut) {
     } else {
         echo "Nu există utilizatori activi.";
     } 
-    // Închide conexiunea la baza de date
-    $conn->close();
+
+
+//partea de jpgraph
+
+$sql = "SELECT m.nume_meserie, COUNT(a.id_meserie) AS numar_angajati 
+        FROM angajati a 
+        JOIN meserii m ON a.id_meserie = m.id_meserie 
+        GROUP BY a.id_meserie";
+
+$result = $conn->query($sql);
+if (!$result) {
+    echo 'Eroare la executarea query-ului: ' . $conn->error;
+    exit;
+}
+
+$meserii = array();
+$numar_angajati = array();
+
+while ($row = $result->fetch_assoc()) {
+    $meserii[] = $row['nume_meserie'];
+    $numar_angajati[] = $row['numar_angajati'];
+}
+
+$fimg = 'jpgraph-3d_pie.png';
+
+$graph = new PieGraph(560, 320);
+
+$theme_class = new VividTheme;
+$graph->SetTheme($theme_class);
+$graph->SetShadow();
+
+$graph->title->Set('Numarul de angajati pe meserie');
+$graph->title->SetFont(FF_FONT1, FS_BOLD);
+
+$p1 = new PiePlot3D($numar_angajati);
+$p1->ExplodeSlice(1);
+$p1->SetCenter(0.5);
+$p1->SetLegends($meserii);
+$graph->legend->Pos(0.1, 0.9);
+
+$graph->Add($p1);
+$graph->Stroke($fimg);
+
+if (file_exists($fimg)) {
+    echo '<img src="' . $fimg . '" />';
+} else {
+    echo 'Unable to create: ' . $fimg;
+}
+
+$conn->close();
+?>
           
-          ?>
           
         
     </section>
@@ -217,11 +248,11 @@ function printeazaRaport(numeUtilizator, continut) {
   
 
 
-</script>
+
 </body>
 </html>
 <?php } else {
-    // Utilizatorul nu este autentificat sau nu este de tip admin, îl redirecționăm către o altă pagină
+    // Utilizatorul nu este autentificat 
     header("Location: index.php");
     exit();
 }
